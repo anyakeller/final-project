@@ -4,6 +4,7 @@ import Books from "./pages/Books";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
+import NewContact from "./pages/NewContact";
 import Nav from "./components/Nav";
 import {/* getCookie, */ authenticateUser} from "./utils/handleSessions";
 
@@ -42,6 +43,7 @@ class App extends React.Component {
         <Nav />
         <Switch>
           <Route exact path="/" render={(props) => <Login {...props} authenticate={this.authenticate} authenticated={this.state.authenticated} />} />
+          <Route exact path="/newContact" render={(props) => <NewContact {...props} authenticate={this.authenticate} authenticated={this.state.authenticated} />} />
           <Route exact path="/signup"  render={(props) => <Signup {...props} authenticate={this.authenticate} authenticated={this.state.authenticated} />} />
           <this.PrivateRoute exact path="/books" component={Books} />
           <Route component={NoMatch} />
