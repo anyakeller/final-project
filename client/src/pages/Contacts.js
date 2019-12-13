@@ -1,17 +1,14 @@
-import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
-import API from "../utils/API";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
+import React, {Component} from 'react';
+import DeleteBtn from '../components/DeleteBtn';
+import Jumbotron from '../components/Jumbotron';
+import API from '../utils/API';
+import {Link} from 'react-router-dom';
+import {Col, Row, Container} from '../components/Grid';
+import {List, ListItem} from '../components/List';
 
 class Contacts extends Component {
   state = {
-    books: [],
-    title: "",
-    author: "",
-    synopsis: ""
+    contacts: []
   };
 
   componentDidMount() {
@@ -20,9 +17,11 @@ class Contacts extends Component {
 
   loadContacts = () => {
     API.getContacts()
-      .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-      )
+      .then(res => {
+				this.setState({contacts: res.data})
+				console.log(res.data);
+			}
+			)
       .catch(err => console.log(err));
   };
 
@@ -32,26 +31,22 @@ class Contacts extends Component {
       .catch(err => console.log(err));
   };
 
-
-
   render() {
     return (
       <Container fluid>
         <Row>
           <Col size="md-12 sm-12">
             <Jumbotron>
-              <h1>Books On My List</h1>
+              <h1>Contacts</h1>
             </Jumbotron>
-            {this.state.books.length ? (
+            {this.state.contacts.length ? (
               <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                {this.state.contacts.map(contact => (
+                  <ListItem key={contact._id}>
+                    <DeleteBtn onClick={() => this.deleteContact(contact._id)} />
+										<p>quickref: {contact.quickref}</p>
+										<p>First Name: {contact.name_first}</p>
+										<p>Last Name: {contact.name_last}</p>
                   </ListItem>
                 ))}
               </List>
