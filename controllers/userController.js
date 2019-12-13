@@ -1,6 +1,5 @@
 const db = require("../models");
 
-// Defining methods for the booksController
 module.exports = {
 
   create: function (req, res) {
@@ -43,7 +42,7 @@ module.exports = {
           res.cookie("userId", user._id, { expires: new Date(Date.now() + 900000), httpOnly: false })
           req.session.userId = user._id;
           console.log('redirect');
-          return res.redirect('/books');
+          return res.redirect('/contacts');
           return res.redirect('/api/profile');
         }
       });
