@@ -71,7 +71,7 @@ class Login extends Component {
         </Row>
 
         {/* Redirect on authentication */}
-        {this.props.authenticated ? <Redirect to='/contacts'/>: <div></div>}
+        {this.props.authenticated ? <Redirect to='/'/>: <div></div>}
       </Container>
     );
   }
