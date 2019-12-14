@@ -17,7 +17,15 @@ var UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  }
+  },
+  contacts: [
+    {
+      // Store ObjectIds in the array
+      type: mongoose.Schema.Types.ObjectId,
+      // The ObjectIds will refer to the ids in the Note model
+      ref: "Contact"
+    }
+  ]
 });
 
 //hashing a password before saving it to the database
