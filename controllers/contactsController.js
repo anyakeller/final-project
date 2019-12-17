@@ -27,7 +27,6 @@ module.exports = {
           {new: true}
         ).then(function(dbUser) {
           // If the User was updated successfully, send it back to the client
-					console.log(dbUser);
           res.json(dbUser);
         });
       })

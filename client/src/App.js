@@ -41,7 +41,7 @@ class App extends React.Component {
         ) : this.state.loading === true ? (
           <div></div>
         ) : (
-          <Redirect to={rest.path} />
+          <Redirect to="/login" />
         )
       }
     />
