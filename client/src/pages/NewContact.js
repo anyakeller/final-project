@@ -30,7 +30,11 @@ class NewContact extends Component {
     if (this.state.quickref) {
       API.saveContact({
         ...this.state
-      }).catch(err => console.log(err));
+      })
+        .then(res => {
+            return <Redirect to="/contacts" />;
+        })
+        .catch(err => console.log(err));
     }
   };
 
