@@ -32,18 +32,16 @@ class App extends React.Component {
     this.authenticate();
   }
 
-  PrivateRoute = ({component: Component, ...rest}) => (
+  PrivateRoute = ({Component: Component, ...rest}) => (
     <Route
       {...rest}
-      render={props =>
-        this.state.authenticated === true ? (
-          <Component {...props} />
-        ) : this.state.loading === true ? (
-          <div></div>
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
+      render={props => {
+        if (this.state.authenticated){ 
+					console.log(Component)
+					return <Component {...props} />}
+        else if (this.state.loading === true) return <div></div>;
+        else return <Redirect to="/login" />;
+      }}
     />
   );
 
@@ -69,7 +67,7 @@ class App extends React.Component {
         <div>
           <Nav />
           <Switch>
-            <this.homeRoute exact path="/"/>
+            <this.homeRoute exact path="/" />
             <Route
               exact
               path="/login"
