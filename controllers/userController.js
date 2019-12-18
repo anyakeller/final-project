@@ -63,7 +63,8 @@ module.exports = {
       } else {
         if (user === null) {
           res.cookie('userId','').status(401);
-          return res.json('Not authorized! Go back!');
+          // return res.json('Not authorized! Go back!');
+					return res.json(false);
         } else {
           res.cookie("userId", user._id, { expires: new Date(Date.now() + 900000), httpOnly: false })
           return res.json(true);

@@ -5,7 +5,6 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
-import Books from './pages/Books';
 import Contacts from './pages/Contacts';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -25,27 +24,38 @@ class App extends React.Component {
 
   authenticate = () =>
     authenticateUser()
-      .then(auth => this.setState({authenticated: auth.data, loading: false}))
-      .catch(err => console.log(err));
+      .then(auth => {
+        console.log('hi');
+        this.setState({authenticated: auth.data, loading: false});
+      })
+      .catch(err => {
+        console.log(err);
+        console.log('oh no');
+        this.setState({authenticated: false, loading: false});
+      });
 
   componentWillMount() {
     this.authenticate();
   }
 
-  PrivateRoute = ({component: Component, ...rest}) => (
-    <Route
-      {...rest}
-      render={props =>
-        this.state.authenticated === true ? (
-          <Component {...props} />
-        ) : this.state.loading === true ? (
-          <div></div>
-        ) : (
-          <Redirect to={rest.path} />
-        )
-      }
-    />
-  );
+  PrivateRoute = ({Component: Component, ...rest}) => {
+    console.log(this.state.authenticated);
+    if (this.state.authenticated) {
+      return (
+        <Route
+          {...rest}
+          render={props => {
+            console.log('is auth');
+            return <Component {...props} />;
+          }}
+        />
+      );
+    } else if (this.state.loading === true) return <div></div>;
+    else {
+      console.log('not auth');
+      return <Redirect to="/login" />;
+    }
+  };
 
   homeRoute = ({...rest}) => (
     <Route
@@ -69,7 +79,7 @@ class App extends React.Component {
         <div>
           <Nav />
           <Switch>
-            <this.homeRoute exact path="/"/>
+            <this.homeRoute exact path="/" />
             <Route
               exact
               path="/login"
@@ -92,7 +102,6 @@ class App extends React.Component {
                 />
               )}
             />
-            // <this.PrivateRoute exact path="/books" component={Books} />
             <this.PrivateRoute exact path="/contacts" component={Contacts} />
             <this.PrivateRoute
               exact
