@@ -1,0 +1,15 @@
+nav {
+    background-color: rgb(255, 255, 255);
+    border-bottom: 3px solid pink;
+    margin-bottom: 1rem;
+}
+
+.navbar-brand {
+    font-family: 'Permanent Marker', cursive;
+    color: rgb(50, 50, 50);
+    text-shadow: 1px 1px 3px darkgrey;
+}
+
+a:hover {
+    color:pink;
+}
