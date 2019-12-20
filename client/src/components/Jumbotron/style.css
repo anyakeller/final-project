@@ -1,0 +1,22 @@
+.jumbotron {
+    background-color: white;
+    border-bottom: rgb(50, 50, 50 .8) 3px;
+    border-bottom-style: inset;
+    border-radius: 0;
+    clear: both;
+    margin-bottom: 2rem;
+    padding: 5px;
+    text-align: center;
+}
+
+h1 {
+    color: rgb(50, 50, 50);
+    font-family: 'Permanent Marker', cursive;
+}
+
+h3 {
+    font-family: 'Patrick Hand', cursive;
+    color: rgb(50, 50, 50);
+    text-align: center;
+
+}

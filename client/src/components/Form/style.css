@@ -1,0 +1,16 @@
+.form-control {
+    border-bottom: 2px solid lightskyblue;
+    border-radius: .1rem;
+    font-family: 'Shadows Into Light Two', cursive;
+}
+
+.btn {
+    color: rgb(50, 50, 50);
+    background-color: lightskyblue;
+    border-radius: .1rem;
+    font-family: 'Patrick Hand', cursive;
+}
+
+.btn:hover {
+    background-color: pink;
+}

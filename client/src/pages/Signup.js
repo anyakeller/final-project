@@ -82,7 +82,7 @@ class Signup extends Component {
                 // disabled={!(this.state.email && this.state.password)}
                 onClick={this.handleFormSubmit}
               >
-                signup
+                Sign up
               </FormBtn>
             </form>
           </Col>
