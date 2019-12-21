@@ -16,62 +16,32 @@ import {/* getCookie, */ authenticateUser} from './utils/handleSessions';
 class App extends React.Component {
   // check cookie
   // getCookie();
-
-  state = {
-    authenticated: false,
-    loading: false
-  };
-
-  authenticate = () =>
+  constructor(props) {
+    super(props);
+    this.state = {
+      authenticated: false,
+      loading: false
+    };
+  }
+  authenticate(who) {
     authenticateUser()
       .then(auth => {
         console.log('hi');
-        this.setState({authenticated: auth.data, loading: false});
+        who.setState({authenticated: auth.data, loading: false});
+        // return auth.data;
       })
       .catch(err => {
         console.log(err);
         console.log('oh no');
-        this.setState({authenticated: false, loading: false});
+        who.setState({authenticated: false, loading: false});
+        // return false;
       });
-
-  componentWillMount() {
-    this.authenticate();
   }
 
-  PrivateRoute = ({Component: Component, ...rest}) => {
-    console.log(this.state.authenticated);
-    if (this.state.authenticated) {
-      return (
-        <Route
-          {...rest}
-          render={props => {
-            console.log('is auth');
-            return <Component {...props} />;
-          }}
-        />
-      );
-    } else if (this.state.loading === true) return <div></div>;
-    else {
-      console.log('not auth');
-      return <Redirect to="/login" />;
-    }
-  };
+  componentWillMount() {
+    this.authenticate(this);
+  }
 
-  homeRoute = ({...rest}) => (
-    <Route
-      exact
-      path="/"
-      render={props =>
-        this.state.authenticated === true ? (
-          <Redirect to="/contacts" />
-        ) : this.state.loading === true ? (
-          <div></div>
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
-    />
-  );
 
   render() {
     return (
@@ -79,7 +49,17 @@ class App extends React.Component {
         <div>
           <Nav />
           <Switch>
-            <this.homeRoute exact path="/" />
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <Contacts
+                  {...props}
+                  authenticate={this.authenticate}
+                  authenticated={this.state.authenticated}
+                />
+              )}
+            />
             <Route
               exact
               path="/login"
@@ -102,11 +82,27 @@ class App extends React.Component {
                 />
               )}
             />
-            <this.PrivateRoute exact path="/contacts" component={Contacts} />
-            <this.PrivateRoute
+            <Route
+              exact
+              path="/contacts"
+              render={props => (
+                <Contacts
+                  {...props}
+                  authenticate={this.authenticate}
+                  authenticated={this.state.authenticated}
+                />
+              )}
+            />
+            <Route
               exact
               path="/newContact"
-              component={NewContact}
+              render={props => (
+                <NewContact
+                  {...props}
+                  authenticate={this.authenticate}
+                  authenticated={this.state.authenticated}
+                />
+              )}
             />
             <Route component={NoMatch} />
           </Switch>

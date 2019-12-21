@@ -7,79 +7,96 @@ import {Input, FormBtn} from '../components/Form';
 
 class NewContact extends Component {
   state = {
-    quickref: '',
-    name_first: '',
-    name_last: '',
-    meeting_info: '',
-    mutualContacts: [],
-    occupation: '',
-    notes: ''
+    loading: true,
+    authenticated: false,
+    formdata: {
+      quickref: '',
+      name_first: '',
+      name_last: '',
+      meeting_info: '',
+      mutualContacts: [],
+      occupation: '',
+      notes: ''
+    }
   };
 
-  componentDidMount() {}
+  componentWillMount() {
+    this.props.authenticate(this);
+  }
+
+  componentDidMount() {
+    console.log('state of auth', this.props.authenticated);
+  }
 
   handleInputChange = event => {
     const {name, value} = event.target;
+    let currentformdata = this.state.formdata;
+    currentformdata[name] = value;
     this.setState({
-      [name]: value
+      formdata: currentformdata
     });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.quickref) {
+    if (this.state.formdata.quickref) {
       API.saveContact({
-        ...this.state
+        ...this.state.formdata
       })
         .then(res => {
-            return <Redirect to="/contacts" />;
+          return <Redirect to="/contacts" />;
         })
         .catch(err => console.log(err));
     }
   };
 
   render() {
-    return (
-      <Container fluid>
-        <Row>
-          <Col size="12">
-            <form>
-              <Input
-                value={this.state.quickref}
-                onChange={this.handleInputChange}
-                name="quickref"
-                placeholder="dude from cafe who sneezed on me(required)"
-                type="text"
-              />
-              <Input
-                value={this.state.name_first}
-                onChange={this.handleInputChange}
-                name="name_first"
-                placeholder="Bob"
-              />
-              <Input
-                value={this.state.name_last}
-                onChange={this.handleInputChange}
-                name="name_last"
-                placeholder="Ross"
-              />
-              <Input
-                value={this.state.meeting_info}
-                onChange={this.handleInputChange}
-                name="meeting_info"
-                placeholder="cafe blah"
-                type="text"
-              />
-              <FormBtn
-                // disabled={!(this.state.email && this.state.password)}
-                onClick={this.handleFormSubmit}>
-                signup
-              </FormBtn>
-            </form>
-          </Col>
-        </Row>
-      </Container>
-    );
+    if (this.state.loading) return <div></div>;
+    else if (this.state.authenticated)
+      return (
+        <Container fluid>
+          <Row>
+            <Col size="12">
+              <form>
+                <Input
+                  value={this.state.formdata.quickref}
+                  onChange={this.handleInputChange}
+                  name="quickref"
+                  placeholder="dude from cafe who sneezed on me(required)"
+                  type="text"
+                />
+                <Input
+                  value={this.state.formdata.name_first}
+                  onChange={this.handleInputChange}
+                  name="name_first"
+                  type="text"
+                  placeholder="Bob"
+                />
+                <Input
+                  value={this.state.formdata.name_last}
+                  onChange={this.handleInputChange}
+                  name="name_last"
+                  type="text"
+                  placeholder="Ross"
+                />
+                <Input
+                  value={this.state.formdata.meeting_info}
+                  onChange={this.handleInputChange}
+                  name="meeting_info"
+                  placeholder="cafe blah"
+                  type="text"
+                />
+                <FormBtn
+                  // disabled={!(this.state.email && this.state.password)}
+                  onClick={this.handleFormSubmit}>
+                  Add Contact
+                </FormBtn>
+              </form>
+            </Col>
+          </Row>
+        </Container>
+      );
+    else return <Redirect to="/login" />;
   }
 }
 
