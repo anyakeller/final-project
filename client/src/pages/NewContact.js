@@ -44,6 +44,8 @@ class NewContact extends Component {
         ...this.state.formdata
       })
         .then(res => {
+					console.log("ASDfadsadsf");
+					this.props.history.push("/contacts");
           return <Redirect to="/contacts" />;
         })
         .catch(err => console.log(err));
