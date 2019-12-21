@@ -1,43 +1,48 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 
-import API from "../utils/API";
-import {  Redirect } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { Input, FormBtn } from "../components/Form";
+import API from '../utils/API';
+import {Redirect} from 'react-router-dom';
+import {Col, Row, Container} from '../components/Grid';
+import {Input, FormBtn} from '../components/Form';
 
 class Signup extends Component {
   state = {
-    email: "",
-    username: "",
-    password: "",
-    passwordConf: ""
+    loading: true,
+    authenticated: false,
+    formdata: {
+      email: '',
+      username: '',
+      password: '',
+      passwordConf: ''
+    }
   };
 
   componentDidMount() {
+    this.props.authenticate(this);
   }
 
-  
   handleInputChange = event => {
-    const { name, value } = event.target;
+    const {name, value} = event.target;
+    let currentformdata = this.state.formdata;
+    currentformdata[name] = value;
     this.setState({
-      [name]: value
+      formdata: currentformdata
     });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.email && this.state.password) {
+    if (this.state.formdata.email && this.state.formdata.password) {
       API.signup({
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password,
-        passwordConf: this.state.passwordConf,
-
+        username: this.state.formdata.username,
+        email: this.state.formdata.email,
+        password: this.state.formdata.password,
+        passwordConf: this.state.formdata.passwordConf
       })
         .then(res => {
-          if(res.status === 200 ){
-            this.props.authenticate();
-            return <Redirect to="/" />
+          if (res.status === 200) {
+            this.props.authenticate(this);
+            return <Redirect to="/" />;
           }
         })
         .catch(err => console.log(err));
@@ -45,55 +50,51 @@ class Signup extends Component {
   };
 
   render() {
+    if (this.state.loading) return <div></div>;
+    else if (!this.state.authenticated)
     return (
       <Container fluid>
         <Row>
           <Col size="12">
- 
             <form>
               <Input
-                value={this.state.username}
+                value={this.state.formdata.username}
                 onChange={this.handleInputChange}
                 name="username"
                 placeholder="username (required)"
               />
               <Input
-                value={this.state.email}
+                value={this.state.formdata.email}
                 onChange={this.handleInputChange}
                 name="email"
                 placeholder="email (required)"
               />
               <Input
-                value={this.state.password}
+                value={this.state.formdata.password}
                 onChange={this.handleInputChange}
                 name="password"
                 placeholder="(required)"
                 type="password"
               />
               <Input
-                value={this.state.passwordConf}
+                value={this.state.formdata.passwordConf}
                 onChange={this.handleInputChange}
                 name="passwordConf"
                 placeholder="(required)"
                 type="password"
               />
-              
+
               <FormBtn
                 // disabled={!(this.state.email && this.state.password)}
-                onClick={this.handleFormSubmit}
-              >
+                onClick={this.handleFormSubmit}>
                 Sign up
               </FormBtn>
             </form>
           </Col>
-          
         </Row>
-        {/* redirect on authenticated */}
-        {this.props.authenticated ? <Redirect to='/books'/>: <div></div>}
-
-
       </Container>
     );
+    else return <Redirect to="/contacts" />;
   }
 }
 

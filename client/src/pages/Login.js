@@ -1,21 +1,24 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 
-import API from "../utils/API";
-import {  Redirect } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { Input, FormBtn } from "../components/Form";
+import API from '../utils/API';
+import {Redirect} from 'react-router-dom';
+import {Col, Row, Container} from '../components/Grid';
+import {Input, FormBtn} from '../components/Form';
 
 class Login extends Component {
   state = {
-      email: "",
-      password: ""
-    };
-    
+    loading: true,
+    authenticated: false,
+    email: '',
+    password: ''
+  };
+
   componentDidMount() {
+    this.props.authenticate(this);
   }
-  
+
   handleInputChange = event => {
-    const { name, value } = event.target;
+    const {name, value} = event.target;
     this.setState({
       [name]: value
     });
@@ -29,9 +32,9 @@ class Login extends Component {
         password: this.state.password
       })
         .then(res => {
-          if(res.status === 200 ){
-            this.props.authenticate();
-            return <Redirect to="/contacts" />
+          if (res.status === 200) {
+            this.props.authenticate(this);
+            return <Redirect to="/contacts" />;
           }
         })
         .catch(err => console.log(err));
@@ -39,11 +42,11 @@ class Login extends Component {
   };
 
   render() {
-    return (
+    if (this.state.loading) return <div></div>;
+    else if (!this.state.authenticated) return (
       <Container fluid>
         <Row>
           <Col size="12">
- 
             <form>
               <Input
                 value={this.state.email}
@@ -58,22 +61,18 @@ class Login extends Component {
                 placeholder="(required)"
                 type="password"
               />
-              
+
               <FormBtn
                 disabled={!(this.state.email && this.state.password)}
-                onClick={this.handleFormSubmit}
-              >
+                onClick={this.handleFormSubmit}>
                 Submit
               </FormBtn>
             </form>
           </Col>
-          
         </Row>
-
-        {/* Redirect on authentication */}
-        {this.props.authenticated ? <Redirect to='/'/>: <div></div>}
       </Container>
     );
+    else return <Redirect to="/" />;
   }
 }
 
