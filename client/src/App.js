@@ -20,20 +20,21 @@ class App extends React.Component {
     super(props);
     this.state = {
       authenticated: false,
-      loading: false
+      loading: false,
+			navoptns:[{name:"",route:""}]
     };
   }
   authenticate(who) {
     authenticateUser()
       .then(auth => {
         console.log('hi');
-        who.setState({authenticated: auth.data, loading: false});
+        who.setState({authenticated: auth.data, loading: false,navoptns:[{name:"contacts",route:"contacts"},{name:"Add New Contact",route:"newContact"}]});
         // return auth.data;
       })
       .catch(err => {
         console.log(err);
         console.log('oh no');
-        who.setState({authenticated: false, loading: false});
+        who.setState({authenticated: false, loading: false,navoptns:[{name:"login",route:""},{name:"create account",route:"signup"}]});
         // return false;
       });
   }
@@ -47,7 +48,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Nav />
+          <Nav navLinks={this.state.navoptns}/>
           <Switch>
             <Route
               exact
