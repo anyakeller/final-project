@@ -11,7 +11,10 @@ import Signup from './pages/Signup';
 import NoMatch from './pages/NoMatch';
 import NewContact from './pages/NewContact';
 import Nav from './components/Nav';
-import {/* getCookie, */ authenticateUser} from './utils/handleSessions';
+import {
+  /* getCookie, */ authenticateUser,
+  logoutUser
+} from './utils/handleSessions';
 
 class App extends React.Component {
   // check cookie
@@ -21,34 +24,59 @@ class App extends React.Component {
     this.state = {
       authenticated: false,
       loading: false,
-			navoptns:[{name:"",route:""}]
+      navoptns: [{name: '', route: ''}]
     };
   }
   authenticate(who) {
     authenticateUser()
       .then(auth => {
         console.log('hi');
-        who.setState({authenticated: auth.data, loading: false,navoptns:[{name:"contacts",route:"contacts"},{name:"Add New Contact",route:"newContact"}]});
+        who.setState({
+          authenticated: auth.data,
+          loading: false,
+          navoptns: [
+            {name: 'contacts', route: 'contacts'},
+            {name: 'Add New Contact', route: 'newContact'}
+          ]
+        });
         // return auth.data;
       })
       .catch(err => {
         console.log(err);
         console.log('oh no');
-        who.setState({authenticated: false, loading: false,navoptns:[{name:"login",route:""},{name:"create account",route:"signup"}]});
+        who.setState({
+          authenticated: false,
+          loading: false,
+          navoptns: [
+            {name: 'login', route: ''},
+            {name: 'create account', route: 'signup'}
+          ]
+        });
         // return false;
       });
+  }
+
+  logout() {
+    logoutUser();
+    this.setState({
+      authenticated: false,
+      loading: false,
+      navoptns: [
+        {name: 'login', route: ''},
+        {name: 'create account', route: 'signup'}
+      ]
+    });
   }
 
   componentWillMount() {
     this.authenticate(this);
   }
 
-
   render() {
     return (
       <Router>
         <div>
-          <Nav navLinks={this.state.navoptns}/>
+          <Nav navLinks={this.state.navoptns} />
           <Switch>
             <Route
               exact
@@ -104,6 +132,14 @@ class App extends React.Component {
                   authenticated={this.state.authenticated}
                 />
               )}
+            />
+            <Route
+              exact
+              path="/logout"
+              render={props => {
+                this.logout();
+                return <Redirect to="/login" />;
+              }}
             />
             <Route component={NoMatch} />
           </Switch>

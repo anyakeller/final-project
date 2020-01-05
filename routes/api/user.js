@@ -13,5 +13,9 @@ router.route("/authenticate")
 router.route("/")
   .post(userController.login);
 
+// Matches with "/api/user"
+router.route("/logout")
+  .post(userController.logout);
+
 // TO-DO: logout route (delete cookie and session - req.session.destroy)
 module.exports = router;
