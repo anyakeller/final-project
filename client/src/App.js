@@ -36,7 +36,8 @@ class App extends React.Component {
           loading: false,
           navoptns: [
             {name: 'contacts', route: 'contacts'},
-            {name: 'Add New Contact', route: 'newContact'}
+            {name: 'Add New Contact', route: 'newContact'},
+            {name: 'Logout', route: 'logout'}
           ]
         });
         // return auth.data;
