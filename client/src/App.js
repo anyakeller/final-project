@@ -56,6 +56,36 @@ class App extends React.Component {
         // return false;
       });
   }
+  
+	authenticateApp() {
+    authenticateUser()
+      .then(auth => {
+        console.log('hi');
+        this.setState({
+          authenticated: auth.data,
+          loading: false,
+          navoptns: [
+            {name: 'contacts', route: 'contacts'},
+            {name: 'Add New Contact', route: 'newContact'},
+            {name: 'Logout', route: 'logout'}
+          ]
+        });
+        // return auth.data;
+      })
+      .catch(err => {
+        console.log(err);
+        console.log('oh no');
+        this.setState({
+          authenticated: false,
+          loading: false,
+          navoptns: [
+            {name: 'login', route: ''},
+            {name: 'create account', route: 'signup'}
+          ]
+        });
+        // return false;
+      });
+  }
 
   logout() {
     logoutUser();
@@ -86,6 +116,7 @@ class App extends React.Component {
                 <Contacts
                   {...props}
                   authenticate={this.authenticate}
+                  authenticateApp={() =>this.authenticateApp()}
                   authenticated={this.state.authenticated}
                 />
               )}
@@ -97,6 +128,7 @@ class App extends React.Component {
                 <Login
                   {...props}
                   authenticate={this.authenticate}
+                  authenticateApp={() =>this.authenticateApp()}
                   authenticated={this.state.authenticated}
                 />
               )}
@@ -108,6 +140,7 @@ class App extends React.Component {
                 <Signup
                   {...props}
                   authenticate={this.authenticate}
+                  authenticateApp={() =>this.authenticateApp()}
                   authenticated={this.state.authenticated}
                 />
               )}
@@ -119,6 +152,7 @@ class App extends React.Component {
                 <Contacts
                   {...props}
                   authenticate={this.authenticate}
+                  authenticateApp={() =>this.authenticateApp()}
                   authenticated={this.state.authenticated}
                 />
               )}
@@ -130,6 +164,7 @@ class App extends React.Component {
                 <NewContact
                   {...props}
                   authenticate={this.authenticate}
+                  authenticateApp={() =>this.authenticateApp()}
                   authenticated={this.state.authenticated}
                 />
               )}

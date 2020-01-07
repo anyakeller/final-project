@@ -18,6 +18,7 @@ class Contacts extends Component {
 
   componentWillMount() {
     this.props.authenticate(this);
+    this.props.authenticateApp();
   }
   componentDidMount() {
     //console.log('state of auth', this.props);
