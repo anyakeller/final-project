@@ -22,8 +22,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      authenticated: false,
-      loading: false,
+      // authenticated: false,
+      // loading: false,
       navoptns: [{name: '', route: ''}]
     };
   }
@@ -33,7 +33,9 @@ class App extends React.Component {
         console.log('hi');
         who.setState({
           authenticated: auth.data,
-          loading: false,
+          loading: false
+        });
+        this.setState({
           navoptns: [
             {name: 'contacts', route: 'contacts'},
             {name: 'Add New Contact', route: 'newContact'},
@@ -47,37 +49,9 @@ class App extends React.Component {
         console.log('oh no');
         who.setState({
           authenticated: false,
-          loading: false,
-          navoptns: [
-            {name: 'login', route: ''},
-            {name: 'create account', route: 'signup'}
-          ]
+          loading: false
         });
-        // return false;
-      });
-  }
-  
-	authenticateApp() {
-    authenticateUser()
-      .then(auth => {
-        console.log('hi');
         this.setState({
-          authenticated: auth.data,
-          loading: false,
-          navoptns: [
-            {name: 'contacts', route: 'contacts'},
-            {name: 'Add New Contact', route: 'newContact'},
-            {name: 'Logout', route: 'logout'}
-          ]
-        });
-        // return auth.data;
-      })
-      .catch(err => {
-        console.log(err);
-        console.log('oh no');
-        this.setState({
-          authenticated: false,
-          loading: false,
           navoptns: [
             {name: 'login', route: ''},
             {name: 'create account', route: 'signup'}
@@ -90,8 +64,8 @@ class App extends React.Component {
   logout() {
     logoutUser();
     this.setState({
-      authenticated: false,
-      loading: false,
+      // authenticated: false,
+      // loading: false,
       navoptns: [
         {name: 'login', route: ''},
         {name: 'create account', route: 'signup'}
@@ -100,7 +74,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    this.authenticate(this);
+    // this.authenticate(this);
   }
 
   render() {
@@ -115,9 +89,7 @@ class App extends React.Component {
               render={props => (
                 <Contacts
                   {...props}
-                  authenticate={this.authenticate}
-                  authenticateApp={() =>this.authenticateApp()}
-                  authenticated={this.state.authenticated}
+                  authenticate={(who)=>this.authenticate(who)}
                 />
               )}
             />
@@ -127,9 +99,7 @@ class App extends React.Component {
               render={props => (
                 <Login
                   {...props}
-                  authenticate={this.authenticate}
-                  authenticateApp={() =>this.authenticateApp()}
-                  authenticated={this.state.authenticated}
+                  authenticate={(who)=>this.authenticate(who)}
                 />
               )}
             />
@@ -139,9 +109,7 @@ class App extends React.Component {
               render={props => (
                 <Signup
                   {...props}
-                  authenticate={this.authenticate}
-                  authenticateApp={() =>this.authenticateApp()}
-                  authenticated={this.state.authenticated}
+                  authenticate={(who)=>this.authenticate(who)}
                 />
               )}
             />
@@ -151,9 +119,7 @@ class App extends React.Component {
               render={props => (
                 <Contacts
                   {...props}
-                  authenticate={this.authenticate}
-                  authenticateApp={() =>this.authenticateApp()}
-                  authenticated={this.state.authenticated}
+                  authenticate={(who)=>this.authenticate(who)}
                 />
               )}
             />
@@ -163,9 +129,7 @@ class App extends React.Component {
               render={props => (
                 <NewContact
                   {...props}
-                  authenticate={this.authenticate}
-                  authenticateApp={() =>this.authenticateApp()}
-                  authenticated={this.state.authenticated}
+                  authenticate={(who)=>this.authenticate(who)}
                 />
               )}
             />
