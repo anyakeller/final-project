@@ -11,7 +11,10 @@ import Signup from './pages/Signup';
 import NoMatch from './pages/NoMatch';
 import NewContact from './pages/NewContact';
 import Nav from './components/Nav';
-import {/* getCookie, */ authenticateUser} from './utils/handleSessions';
+import {
+  /* getCookie, */ authenticateUser,
+  logoutUser
+} from './utils/handleSessions';
 
 class App extends React.Component {
   // check cookie
@@ -19,35 +22,66 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      authenticated: false,
-      loading: false
+      // authenticated: false,
+      // loading: false,
+      navoptns: [{name: '', route: ''}]
     };
   }
   authenticate(who) {
     authenticateUser()
       .then(auth => {
         console.log('hi');
-        who.setState({authenticated: auth.data, loading: false});
+        who.setState({
+          authenticated: auth.data,
+          loading: false
+        });
+        this.setState({
+          navoptns: [
+            {name: 'contacts', route: 'contacts'},
+            {name: 'Add New Contact', route: 'newContact'},
+            {name: 'Logout', route: 'logout'}
+          ]
+        });
         // return auth.data;
       })
       .catch(err => {
         console.log(err);
         console.log('oh no');
-        who.setState({authenticated: false, loading: false});
+        who.setState({
+          authenticated: false,
+          loading: false
+        });
+        this.setState({
+          navoptns: [
+            {name: 'login', route: ''},
+            {name: 'create account', route: 'signup'}
+          ]
+        });
         // return false;
       });
   }
 
-  componentWillMount() {
-    this.authenticate(this);
+  logout() {
+    logoutUser();
+    this.setState({
+      // authenticated: false,
+      // loading: false,
+      navoptns: [
+        {name: 'login', route: ''},
+        {name: 'create account', route: 'signup'}
+      ]
+    });
   }
 
+  componentWillMount() {
+    // this.authenticate(this);
+  }
 
   render() {
     return (
       <Router>
         <div>
-          <Nav />
+          <Nav navLinks={this.state.navoptns} />
           <Switch>
             <Route
               exact
@@ -55,8 +89,7 @@ class App extends React.Component {
               render={props => (
                 <Contacts
                   {...props}
-                  authenticate={this.authenticate}
-                  authenticated={this.state.authenticated}
+                  authenticate={(who)=>this.authenticate(who)}
                 />
               )}
             />
@@ -66,8 +99,7 @@ class App extends React.Component {
               render={props => (
                 <Login
                   {...props}
-                  authenticate={this.authenticate}
-                  authenticated={this.state.authenticated}
+                  authenticate={(who)=>this.authenticate(who)}
                 />
               )}
             />
@@ -77,8 +109,7 @@ class App extends React.Component {
               render={props => (
                 <Signup
                   {...props}
-                  authenticate={this.authenticate}
-                  authenticated={this.state.authenticated}
+                  authenticate={(who)=>this.authenticate(who)}
                 />
               )}
             />
@@ -88,8 +119,7 @@ class App extends React.Component {
               render={props => (
                 <Contacts
                   {...props}
-                  authenticate={this.authenticate}
-                  authenticated={this.state.authenticated}
+                  authenticate={(who)=>this.authenticate(who)}
                 />
               )}
             />
@@ -99,10 +129,17 @@ class App extends React.Component {
               render={props => (
                 <NewContact
                   {...props}
-                  authenticate={this.authenticate}
-                  authenticated={this.state.authenticated}
+                  authenticate={(who)=>this.authenticate(who)}
                 />
               )}
+            />
+            <Route
+              exact
+              path="/logout"
+              render={props => {
+                this.logout();
+                return <Redirect to="/login" />;
+              }}
             />
             <Route component={NoMatch} />
           </Switch>
