@@ -53,8 +53,7 @@ class App extends React.Component {
         });
         this.setState({
           navoptns: [
-            {name: 'login', route: ''},
-            {name: 'create account', route: 'signup'}
+            //NavLink are intentionally null
           ]
         });
         // return false;

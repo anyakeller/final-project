@@ -11,7 +11,6 @@ class Signup extends Component {
     authenticated: false,
     formdata: {
       email: '',
-      username: '',
       password: '',
       passwordConf: ''
     }
@@ -34,7 +33,6 @@ class Signup extends Component {
     event.preventDefault();
     if (this.state.formdata.email && this.state.formdata.password) {
       API.signup({
-        username: this.state.formdata.username,
         email: this.state.formdata.email,
         password: this.state.formdata.password,
         passwordConf: this.state.formdata.passwordConf
@@ -56,14 +54,8 @@ class Signup extends Component {
       <Container fluid>
         <Row>
           <Col size="12">
+          <h5 style={{ fontFamily: "'Permanent Marker', cursive", color: "rgb(50, 50, 50)", textAlign: "center", textShadow: "1px 1px 1px lightgrey"}}>Sign Up</h5>
             <form>
-              <Label>Username</Label>
-              <Input
-                value={this.state.formdata.username}
-                onChange={this.handleInputChange}
-                name="username"
-                placeholder="e.g. bross1029"
-              />
               <Label>Email</Label>
               <Input
                 value={this.state.formdata.email}

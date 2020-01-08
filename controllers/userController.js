@@ -5,14 +5,12 @@ module.exports = {
     //validate request
     if (
       req.body.email &&
-      req.body.username &&
       req.body.password &&
       req.body.passwordConf
     ) {
       //create data
       const userData = {
         email: req.body.email,
-        username: req.body.username,
         password: req.body.password
       };
       db.User.create(userData)
