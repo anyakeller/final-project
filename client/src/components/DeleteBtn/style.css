@@ -1,4 +1,5 @@
 .delete-btn {
   float: right;
   color: pink;
+  cursor: pointer;
 }

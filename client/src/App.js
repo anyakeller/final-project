@@ -11,6 +11,7 @@ import Signup from './pages/Signup';
 import NoMatch from './pages/NoMatch';
 import NewContact from './pages/NewContact';
 import Nav from './components/Nav';
+import AnimationView from './pages/AnimationView';
 import {
   /* getCookie, */ authenticateUser,
   logoutUser
@@ -118,6 +119,16 @@ class App extends React.Component {
               path="/contacts"
               render={props => (
                 <Contacts
+                  {...props}
+                  authenticate={(who)=>this.authenticate(who)}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/animationView"
+              render={props => (
+                <AnimationView
                   {...props}
                   authenticate={(who)=>this.authenticate(who)}
                 />
