@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import API from '../utils/API';
 import {Redirect} from 'react-router-dom';
 import {Col, Row, Container} from '../components/Grid';
-import {Input, FormBtn} from '../components/Form';
+import {Input, FormBtn, Label} from '../components/Form';
 
 class NewContact extends Component {
   state = {
@@ -60,13 +60,15 @@ class NewContact extends Component {
           <Row>
             <Col size="12">
               <form>
+                <Label>Quick Reference</Label>
                 <Input
                   value={this.state.formdata.quickref}
                   onChange={this.handleInputChange}
                   name="quickref"
-                  placeholder="dude from cafe who sneezed on me(required)"
+                  placeholder="e.g. Dude who taught me how to paint"
                   type="text"
                 />
+                <Label>First Name</Label>
                 <Input
                   value={this.state.formdata.name_first}
                   onChange={this.handleInputChange}
@@ -74,6 +76,7 @@ class NewContact extends Component {
                   type="text"
                   placeholder="Bob"
                 />
+                <Label>Last Name</Label>
                 <Input
                   value={this.state.formdata.name_last}
                   onChange={this.handleInputChange}
@@ -81,11 +84,12 @@ class NewContact extends Component {
                   type="text"
                   placeholder="Ross"
                 />
+                <Label>Meeting Notes</Label>
                 <Input
                   value={this.state.formdata.meeting_info}
                   onChange={this.handleInputChange}
                   name="meeting_info"
-                  placeholder="cafe blah"
+                  placeholder="Had a lot of cameras around and kept talking about happy trees. Great hair."
                   type="text"
                 />
                 <FormBtn

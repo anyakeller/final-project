@@ -6,7 +6,7 @@ const ContactSchema = new Schema({
   quickref: {type: String, required: true},
   name_first: String,
   name_last: String,
-  meeting_info: {date: { type: Date, default: Date.now },where:String,whohow:String,details:String},
+  meeting_info: String,
   mutualContacts:[String],
 	occupation:String,
 	notes:String

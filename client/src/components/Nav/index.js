@@ -10,7 +10,7 @@ function Nav(props) {
         Who You
       </a>
 			{props.navLinks.map(link =>(
-				<a href={"/"+link.route}>
+				<a className="nav-link" href={"/"+link.route}>
 					{link.name}
 				</a>
 			))}

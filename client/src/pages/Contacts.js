@@ -57,9 +57,10 @@ class Contacts extends Component {
                       <DeleteBtn
                         onClick={() => this.deleteContact(contact._id)}
                       />
-                      <p>quickref: {contact.quickref}</p>
-                      <p>First Name: {contact.name_first}</p>
-                      <p>Last Name: {contact.name_last}</p>
+                      <span className="contact-label">QUICK REFERENCE</span><p> {contact.quickref}</p>
+                      <span className="contact-label">FIRST NAME</span><p> {contact.name_first}</p>
+                      <span className="contact-label">LAST NAME</span><p> {contact.name_last}</p>
+                      <span className="contact-label">MEETING NOTES</span><p> {contact.meeting_info}</p>
                     </ListItem>
                   ))}
                 </List>

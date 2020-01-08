@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import API from '../utils/API';
 import {Redirect} from 'react-router-dom';
 import {Col, Row, Container} from '../components/Grid';
-import {Input, FormBtn} from '../components/Form';
+import {Input, FormBtn, Label} from '../components/Form';
 
 class Login extends Component {
   state = {
@@ -48,17 +48,19 @@ class Login extends Component {
         <Row>
           <Col size="12">
             <form>
+              <Label>Email</Label>
               <Input
                 value={this.state.email}
                 onChange={this.handleInputChange}
                 name="email"
-                placeholder="email (required)"
+                placeholder="bross@pbs.org"
               />
+              <Label>Password</Label>
               <Input
                 value={this.state.password}
                 onChange={this.handleInputChange}
                 name="password"
-                placeholder="(required)"
+                placeholder="* * * * *"
                 type="password"
               />
 

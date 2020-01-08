@@ -27,3 +27,10 @@ export function FormBtn(props) {
     </button>
   );
 }
+
+
+export function Label( {children} ) {
+  return (
+    <label> {children} </label>
+  );
+}
