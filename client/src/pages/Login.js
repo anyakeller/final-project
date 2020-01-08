@@ -47,6 +47,7 @@ class Login extends Component {
       <Container fluid>
         <Row>
           <Col size="12">
+            <h5 style={{ fontFamily: "'Permanent Marker', cursive", color: "rgb(50, 50, 50)", textAlign: "center", textShadow: "1px 1px 1px lightgrey"}}>Login</h5>
             <form>
               <Label>Email</Label>
               <Input
@@ -71,6 +72,13 @@ class Login extends Component {
               </FormBtn>
             </form>
           </Col>
+        </Row>
+        <Row>
+          <p className="mx-auto"
+          style= {{border: "none", color: "#495057", display: "inline-block", fontFamily: "'Patrick Hand', cursive", fontSize: "small", textAlign: "center"}}
+          >
+            Don't have an account? <a 
+            style= {{color: "lightskyblue"}} href="/signup">Sign up</a></p>
         </Row>
       </Container>
     );

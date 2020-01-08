@@ -3,6 +3,7 @@
     border-radius: .1rem;
     color: 495057;
     font-family: 'Shadows Into Light Two', cursive;
+    margin: auto;
 }
 
 .form-control:focus {
