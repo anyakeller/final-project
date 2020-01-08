@@ -38,8 +38,8 @@ class App extends React.Component {
         this.setState({
           navoptns: [
             {name: 'contacts', route: 'contacts'},
-            {name: 'Add New Contact', route: 'newContact'},
-            {name: 'Logout', route: 'logout'}
+            {name: '+ new contact', route: 'newContact'},
+            {name: 'logout', route: 'logout'}
           ]
         });
         // return auth.data;

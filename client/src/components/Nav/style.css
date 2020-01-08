@@ -13,3 +13,14 @@ nav {
 a:hover {
     color:pink;
 }
+
+.nav-link {
+    color: #495057;
+    display: inline-flex;
+    font-family: 'Patrick Hand', cursive;
+    text-shadow: 1px 1px 1px rgb(212, 212, 212);
+}
+
+.nav-link:hover {
+    color: lightskyblue;
+}
