@@ -58,7 +58,7 @@ class NewContact extends Component {
       return (
         <Container fluid>
           <Row>
-            <Col size="12">
+            <Col size="10">
               <form>
                 <Label>Quick Reference</Label>
                 <Input
