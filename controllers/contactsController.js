@@ -18,6 +18,18 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  search: function(req, res) {
+    console.log('hit search');
+    db.User.findOne({_id: req.session.userId})
+      .populate('contacts')
+      .then(dbModel => {
+        var thing = dbModel.contacts.filter(function(contact) {
+          return contact.name_last.includes(req.params.query);
+        });
+        res.json(thing);
+      })
+      .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     console.log(req.session.userId);
     // console.log(`req.header.session ${JSON.stringify(req.session, null, 4)}`);
