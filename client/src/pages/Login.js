@@ -46,7 +46,7 @@ class Login extends Component {
     else if (!this.state.authenticated) return (
       <Container fluid>
         <Row>
-          <Col size="12">
+          <Col size="10">
             <h5 style={{ fontFamily: "'Permanent Marker', cursive", color: "rgb(50, 50, 50)", textAlign: "center", textShadow: "1px 1px 1px lightgrey"}}>Login</h5>
             <form>
               <Label>Email</Label>

@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import DeleteBtn from '../components/DeleteBtn';
 import Jumbotron from '../components/Jumbotron';
 import API from '../utils/API';
-import {Link, Redirect} from 'react-router-dom';
-import {Col, Row, Container} from '../components/Grid';
-import {List, ListItem} from '../components/List';
+import { Link, Redirect } from 'react-router-dom';
+import { Col, Row, Container } from '../components/Grid';
+import { List, ListItem } from '../components/List';
 
 class Contacts extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Contacts extends Component {
   loadContacts = () => {
     API.getContacts()
       .then(res => {
-        this.setState({contacts: res.data});
+        this.setState({ contacts: res.data });
         console.log(res.data);
       })
       .catch(err => console.log(err));
@@ -49,6 +49,8 @@ class Contacts extends Component {
             <Col size="md-12 sm-12">
               <Jumbotron>
                 <h1>Contacts</h1>
+                <a className="mx-auto"
+                  style={{ color: "lightskyblue", display: "inline-block", fontFamily: "'Patrick Hand', cursive", fontSize: "small", textAlign: "center" }} href="/AnimationView">switch to sliding view</a>
               </Jumbotron>
               {this.state.contacts.length ? (
                 <List>
@@ -65,8 +67,8 @@ class Contacts extends Component {
                   ))}
                 </List>
               ) : (
-                <h3>No Results to Display</h3>
-              )}
+                  <h3>No Results to Display</h3>
+                )}
             </Col>
           </Row>
         </Container>

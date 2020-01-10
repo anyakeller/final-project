@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Jumbotron from '../components/Jumbotron';
 import AnimationDiv from '../components/AnimationDiv';
-import {Col, Row, Container} from '../components/Grid';
+import { Col, Row, Container } from '../components/Grid';
 import API from '../utils/API';
-import {Link, Redirect} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class AnimationView extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class AnimationView extends Component {
   loadContacts = () => {
     API.getContacts()
       .then(res => {
-        this.setState({contacts: res.data});
+        this.setState({ contacts: res.data });
         console.log(res.data);
       })
       .catch(err => console.log(err));
@@ -46,6 +46,8 @@ class AnimationView extends Component {
             <Col size="md-12 sm-12">
               <Jumbotron>
                 <h1>Contacts</h1>
+                <a className="mx-auto"
+                  style={{ color: "lightskyblue", display: "inline-block", fontFamily: "'Patrick Hand', cursive", fontSize: "small", textAlign: "center" }} href="/contacts">switch to scrolling view</a>
               </Jumbotron>
             </Col>
           </Row>
@@ -57,8 +59,8 @@ class AnimationView extends Component {
                   del={this.deleteContact}
                 />
               ) : (
-                <h3>No Results to Display</h3>
-              )}
+                  <h3>No Results to Display</h3>
+                )}
             </Col>
           </Row>
         </Container>
