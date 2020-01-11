@@ -25,8 +25,11 @@ export default function AnimationDiv(props) {
   });
 
   return (
-    <div>
-      <button onClick={onClickLeft}>Left</button>
+    <>
+      <div className="inlineStylesAreHard">
+        <i onClick={onClickLeft} className="fas fa-long-arrow-alt-left fa-3x"></i>
+        <i onClick={onClickRight} className="fas fa-long-arrow-alt-right fa-3x"></i>
+      </div>
       <div className="simple-trans-main">
         {transitions.map(({item, props, key}) => (
           <animated.div key={key} className="bg" style={{...props}}>
@@ -34,7 +37,6 @@ export default function AnimationDiv(props) {
           </animated.div>
         ))}
       </div>
-      <button onClick={onClickRight}>Right</button>
-    </div>
+    </>
   );
 }

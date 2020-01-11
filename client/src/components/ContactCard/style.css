@@ -1,68 +1,67 @@
 .simple-trans-main {
-    width: 100%;
+  width: 100%;
 }
 
 .list-overflow-container {
-    align-content: center;
-    margin: 0 auto;
-    max-height: 545px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
-  
-  .list-overflow-container ul {
-    margin: 0;
-    margin-bottom: 4rem;
-  }
-  
-  .list-overflow-container li {
-    border-radius: 0px;
-    z-index: 10;
-  }
-  
-  .list-overflow-container li a {
-    color: #2A878C;
-  }
-  
-  .list-group-item {
-    border-left: 1px solid rgba(0,0,0,0.125);
-    border-right: 1px solid rgba(0,0,0,0.125);
-    margin-bottom: .5rem;
-    z-index: 10;
-  }
-  
-  .list-group-item:first-child {
-      border-top-left-radius: 0rem;
-      border-top-right-radius: 0rem;
-  }
-  
-  .list-group-item:last-child {
-    margin-bottom: 0;
-    border-bottom-right-radius: 0rem;
-    border-bottom-left-radius: 0rem;
-  }
-  
-  p {
-    border-bottom: .01rem solid lightskyblue;
-    color: navy;
-    font-family: 'Shadows Into Light Two', cursive;
-    padding-left: .5rem;
-    
-  }
-  
-  .contact-label {
-    color: 495057;
-    font-family: 'Patrick Hand', cursive;
-    font-size: large;
-    font-weight: bolder;
-  }
+  align-content: center;
+  margin: 0 auto;
+  max-height: 545px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 
-  .animated-card-heading {
-    border-bottom: .1rem solid pink;
-    color: navy;
-    font-family: "Shadows Into Light Two", cursive;
-    margin-bottom: 1rem;
-    margin-top: .5rem;
-    padding-left: .5rem;
-    width: 95%
-  }
+.list-overflow-container ul {
+  margin: 0;
+  margin-bottom: 4rem;
+}
+
+.list-overflow-container li {
+  border-radius: 0px;
+  z-index: 10;
+}
+
+.list-overflow-container li a {
+  color: #2a878c;
+}
+
+.list-group-item {
+  border-left: 1px solid rgba(0, 0, 0, 0.125);
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+  margin-bottom: 0.5rem;
+  z-index: 10;
+}
+
+.list-group-item:first-child {
+  border-top-left-radius: 0rem;
+  border-top-right-radius: 0rem;
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 0rem;
+  border-bottom-left-radius: 0rem;
+}
+
+p {
+  border-bottom: 0.01rem solid lightskyblue;
+  color: navy;
+  font-family: 'Shadows Into Light Two', cursive;
+  padding-left: 0.5rem;
+}
+
+.contact-label {
+  color: 495057;
+  font-family: 'Patrick Hand', cursive;
+  font-size: large;
+  font-weight: bolder;
+}
+
+.animated-card-heading {
+  border-bottom: 0.1rem solid pink;
+  color: navy;
+  font-family: 'Shadows Into Light Two', cursive;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+  width: 95%;
+}
