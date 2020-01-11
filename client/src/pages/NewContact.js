@@ -60,14 +60,6 @@ class NewContact extends Component {
           <Row>
             <Col size="10">
               <form>
-                <Label>Quick Reference</Label>
-                <Input
-                  value={this.state.formdata.quickref}
-                  onChange={this.handleInputChange}
-                  name="quickref"
-                  placeholder="e.g. Dude who taught me how to paint"
-                  type="text"
-                />
                 <Label>First Name</Label>
                 <Input
                   value={this.state.formdata.name_first}
@@ -84,12 +76,20 @@ class NewContact extends Component {
                   type="text"
                   placeholder="Ross"
                 />
+                <Label>Personal Details</Label>
+                <Input
+                  value={this.state.formdata.quickref}
+                  onChange={this.handleInputChange}
+                  name="quickref"
+                  placeholder="e.g. Dude who taught me how to paint"
+                  type="text"
+                />
                 <Label>Meeting Notes</Label>
                 <Input
                   value={this.state.formdata.meeting_info}
                   onChange={this.handleInputChange}
                   name="meeting_info"
-                  placeholder="Had a lot of cameras around and kept talking about happy trees. Great hair."
+                  placeholder="Kept talking about happy trees. Great hair."
                   type="text"
                 />
                 <FormBtn
