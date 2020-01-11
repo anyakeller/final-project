@@ -26,8 +26,8 @@ module.exports = {
 				console.log(dbModel.contacts);
         var thing = dbModel.contacts.filter(function(contact) {
 					var fullName = contact.name_last+contact.name_first;
-					console.log(fullName);
-					console.log(req.params.query);
+					// console.log(fullName);
+					// console.log(req.params.query);
           return fullName.includes(req.params.query);
         });
         res.json(thing);
@@ -35,7 +35,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    console.log(req.session.userId);
+    // console.log(req.session.userId);
     // console.log(`req.header.session ${JSON.stringify(req.session, null, 4)}`);
     db.Contact.create(req.body)
       .then(dbContact => {
