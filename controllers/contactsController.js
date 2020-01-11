@@ -23,15 +23,19 @@ module.exports = {
     db.User.findOne({_id: req.session.userId})
       .populate('contacts')
       .then(dbModel => {
+				console.log(dbModel.contacts);
         var thing = dbModel.contacts.filter(function(contact) {
-          return contact.name_last.includes(req.params.query);
+					var fullName = contact.name_last+contact.name_first;
+					// console.log(fullName);
+					// console.log(req.params.query);
+          return fullName.toLowerCase().includes(req.params.query.toLowerCase());
         });
         res.json(thing);
       })
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    console.log(req.session.userId);
+    // console.log(req.session.userId);
     // console.log(`req.header.session ${JSON.stringify(req.session, null, 4)}`);
     db.Contact.create(req.body)
       .then(dbContact => {
