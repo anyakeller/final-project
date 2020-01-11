@@ -1,9 +1,23 @@
 .simple-trans-main > div {
-  cursor: pointer;
   position: absolute;
   will-change: transform, opacity;
-	width: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+i {
+  cursor: pointer;
+	margin-left:5em;
+	margin-right:5em;
+}
+i:hover {
+    color: red;
+}
+
+.inlineStylesAreHard {
+	padding: 0 2em;
+	display:flex;
+	justify-content: center;
 }

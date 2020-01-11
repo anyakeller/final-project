@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import DeleteBtn from '../components/DeleteBtn';
 import Jumbotron from '../components/Jumbotron';
 import API from '../utils/API';
-import { Link, Redirect } from 'react-router-dom';
-import { Col, Row, Container } from '../components/Grid';
-import { List, ListItem } from '../components/List';
-import { Input, FormBtn, Label } from '../components/Form';
+import {Link, Redirect} from 'react-router-dom';
+import {Col, Row, Container} from '../components/Grid';
+import {List, ListItem} from '../components/List';
+import {Input, FormBtn, Label} from '../components/Form';
 
 class Contacts extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Contacts extends Component {
   loadContacts = () => {
     API.getContacts()
       .then(res => {
-        this.setState({ contacts: res.data, allContacts: res.data });
+        this.setState({contacts: res.data, allContacts: res.data});
         // console.log(res.data);
       })
       .catch(err => console.log(err));
@@ -43,7 +43,7 @@ class Contacts extends Component {
     if (this.state.query !== '') {
       API.searchContacts(this.state.query)
         .then(res => {
-          this.setState({ contacts: res.data });
+          this.setState({contacts: res.data});
           console.log(res.data);
         })
         .catch(err => console.log(err));
@@ -52,11 +52,11 @@ class Contacts extends Component {
 
   clearSearch = event => {
     event.preventDefault();
-    this.setState({ contacts: this.state.allContacts, query: "" });
-  }
+    this.setState({contacts: this.state.allContacts, query: ''});
+  };
 
   handleQueryChange = event => {
-    this.setState({ query: event.target.value });
+    this.setState({query: event.target.value});
   };
 
   deleteContact = id => {
@@ -75,9 +75,10 @@ class Contacts extends Component {
               <Jumbotron>
                 <h1
                   style={{
-                    marginBottom: "10px"
-                  }}
-                >Contacts</h1>
+                    marginBottom: '10px'
+                  }}>
+                  Contacts
+                </h1>
                 <a
                   className="mx-auto"
                   id="toggle"
@@ -94,10 +95,9 @@ class Contacts extends Component {
                 </a>
 
                 <form>
-
                   <Row>
                     <Input
-                      style={{width: "80vw"}}
+                      style={{width: '80vw'}}
                       value={this.state.query}
                       onChange={this.handleQueryChange}
                       name="search"
@@ -105,14 +105,31 @@ class Contacts extends Component {
                       type="text"
                     />
                   </Row>
-                  <Row className="mx-auto" style={{ display: "flex", justifyContent: "center" }}>
+                  <Row
+                    className="mx-auto"
+                    style={{display: 'flex', justifyContent: 'center'}}>
                     <Col size="12">
-                      <FormBtn style={{ justifyContent: "center",  display: "inline-block", float: "none"}} onClick={this.handleSearch}>Search</FormBtn>
-                      <FormBtn style={{ justifyContent: "center",  display: "inline-block", float: "none"}} onClick={this.clearSearch}>Clear</FormBtn>
+                      <FormBtn
+                        style={{
+                          justifyContent: 'center',
+                          display: 'inline-block',
+                          float: 'none'
+                        }}
+                        onClick={this.handleSearch}>
+                        Search
+                      </FormBtn>
+                      <FormBtn
+                        style={{
+                          justifyContent: 'center',
+                          display: 'inline-block',
+                          float: 'none'
+                        }}
+                        onClick={this.clearSearch}>
+                        Clear
+                      </FormBtn>
                     </Col>
                   </Row>
                 </form>
-
               </Jumbotron>
               {this.state.contacts.length ? (
                 <List>
@@ -123,15 +140,15 @@ class Contacts extends Component {
                       />
                       <h4
                         style={{
-                          borderBottom: ".1rem solid pink",
-                          color: "navy",
-                          fontFamily: "Shadows Into Light Two, cursive",
-                          marginBottom: "1rem",
-                          marginTop: ".5rem",
-                          paddingLeft: ".5rem",
-                          width: "95%"
-                        }}
-                      >{contact.name_first} {contact.name_last}
+                          borderBottom: '.1rem solid pink',
+                          color: 'navy',
+                          fontFamily: 'Shadows Into Light Two, cursive',
+                          marginBottom: '1rem',
+                          marginTop: '.5rem',
+                          paddingLeft: '.5rem',
+                          width: '95%'
+                        }}>
+                        {contact.name_first} {contact.name_last}
                       </h4>
                       <span className="contact-label">PERSONAL DETAILS</span>
                       <p>{contact.quickref}</p>
@@ -141,8 +158,8 @@ class Contacts extends Component {
                   ))}
                 </List>
               ) : (
-                  <h3>No Results to Display</h3>
-                )}
+                <h3>No Results to Display</h3>
+              )}
             </Col>
           </Row>
         </Container>
