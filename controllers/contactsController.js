@@ -28,7 +28,7 @@ module.exports = {
 					var fullName = contact.name_last+contact.name_first;
 					// console.log(fullName);
 					// console.log(req.params.query);
-          return fullName.includes(req.params.query);
+          return fullName.toLowerCase().includes(req.params.query.toLowerCase());
         });
         res.json(thing);
       })
