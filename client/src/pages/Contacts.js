@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import DeleteBtn from '../components/DeleteBtn';
 import Jumbotron from '../components/Jumbotron';
 import API from '../utils/API';
-import {Link, Redirect} from 'react-router-dom';
-import {Col, Row, Container} from '../components/Grid';
-import {List, ListItem} from '../components/List';
-import {Input, FormBtn, Label} from '../components/Form';
+import { Link, Redirect } from 'react-router-dom';
+import { Col, Row, Container } from '../components/Grid';
+import { List, ListItem } from '../components/List';
+import { Input, FormBtn, Label } from '../components/Form';
 
 class Contacts extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Contacts extends Component {
   loadContacts = () => {
     API.getContacts()
       .then(res => {
-        this.setState({contacts: res.data, allContacts: res.data});
+        this.setState({ contacts: res.data, allContacts: res.data });
         // console.log(res.data);
       })
       .catch(err => console.log(err));
@@ -43,20 +43,20 @@ class Contacts extends Component {
     if (this.state.query !== '') {
       API.searchContacts(this.state.query)
         .then(res => {
-          this.setState({contacts: res.data});
+          this.setState({ contacts: res.data });
           console.log(res.data);
         })
         .catch(err => console.log(err));
     }
   };
 
-	clearSearch = event =>{
+  clearSearch = event => {
     event.preventDefault();
-		this.setState({contacts: this.state.allContacts,query:""});
-	}
+    this.setState({ contacts: this.state.allContacts, query: "" });
+  }
 
   handleQueryChange = event => {
-    this.setState({query: event.target.value});
+    this.setState({ query: event.target.value });
   };
 
   deleteContact = id => {
@@ -71,33 +71,48 @@ class Contacts extends Component {
       return (
         <Container fluid>
           <Row>
-            <Col size="md-12 sm-12">
+            <Col size="12">
               <Jumbotron>
-                <h1>Contacts</h1>
+                <h1
+                  style={{
+                    marginBottom: "10px"
+                  }}
+                >Contacts</h1>
                 <a
                   className="mx-auto"
+                  id="toggle"
                   style={{
                     color: 'lightskyblue',
                     display: 'inline-block',
                     fontFamily: "'Patrick Hand', cursive",
                     fontSize: 'small',
+                    marginBottom: '20px',
                     textAlign: 'center'
                   }}
                   href="/AnimationView">
                   switch to sliding view
                 </a>
+
                 <form>
-                  <FormBtn onClick={this.handleSearch}>Search</FormBtn>
-                  <Label>Search</Label>
-                  <Input
-                    value={this.state.query}
-                    onChange={this.handleQueryChange}
-                    name="search"
-                    placeholder="frank"
-                    type="text"
-                  />
-                  <FormBtn onClick={this.clearSearch}>Clear Search</FormBtn>
+
+                  <Row>
+                    <Input
+                      style={{width: "80vw"}}
+                      value={this.state.query}
+                      onChange={this.handleQueryChange}
+                      name="search"
+                      placeholder="search"
+                      type="text"
+                    />
+                  </Row>
+                  <Row className="mx-auto" style={{ display: "flex", justifyContent: "center" }}>
+                    <Col size="12">
+                      <FormBtn style={{ justifyContent: "center",  display: "inline-block", float: "none"}} onClick={this.handleSearch}>Search</FormBtn>
+                      <FormBtn style={{ justifyContent: "center",  display: "inline-block", float: "none"}} onClick={this.clearSearch}>Clear</FormBtn>
+                    </Col>
+                  </Row>
                 </form>
+
               </Jumbotron>
               {this.state.contacts.length ? (
                 <List>
@@ -106,20 +121,28 @@ class Contacts extends Component {
                       <DeleteBtn
                         onClick={() => this.deleteContact(contact._id)}
                       />
-                      <span className="contact-label">QUICK REFERENCE</span>
-                      <p> {contact.quickref}</p>
-                      <span className="contact-label">FIRST NAME</span>
-                      <p> {contact.name_first}</p>
-                      <span className="contact-label">LAST NAME</span>
-                      <p> {contact.name_last}</p>
+                      <h4
+                        style={{
+                          borderBottom: ".1rem solid pink",
+                          color: "navy",
+                          fontFamily: "Shadows Into Light Two, cursive",
+                          marginBottom: "1rem",
+                          marginTop: ".5rem",
+                          paddingLeft: ".5rem",
+                          width: "95%"
+                        }}
+                      >{contact.name_first} {contact.name_last}
+                      </h4>
+                      <span className="contact-label">PERSONAL DETAILS</span>
+                      <p>{contact.quickref}</p>
                       <span className="contact-label">MEETING NOTES</span>
-                      <p> {contact.meeting_info}</p>
+                      <p>{contact.meeting_info}</p>
                     </ListItem>
                   ))}
                 </List>
               ) : (
-                <h3>No Results to Display</h3>
-              )}
+                  <h3>No Results to Display</h3>
+                )}
             </Col>
           </Row>
         </Container>
