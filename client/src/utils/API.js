@@ -37,6 +37,10 @@ export default {
   saveContact: function(contactData) {
     return axios.post('/api/contacts', contactData);
   },
+  // updates
+  updateContact: function(id,contactData) {
+    return axios.put('/api/contacts/'+id, contactData);
+  },
   searchContacts: function(query) {
     return axios.get('/api/contacts/search/'+query);
   }
