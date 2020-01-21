@@ -42,6 +42,13 @@
   border-bottom-left-radius: 0rem;
 }
 
+.contactAttr {
+  border-bottom: 0.01rem solid lightskyblue;
+  color: navy;
+  font-family: 'Shadows Into Light Two', cursive;
+  padding-left: 0.5rem;
+}
+
 p {
   border-bottom: 0.01rem solid lightskyblue;
   color: navy;
