@@ -9,15 +9,14 @@
 
 i {
   cursor: pointer;
-	margin-left:5em;
-	margin-right:5em;
 }
 i:hover {
     color: red;
 }
 
 .inlineStylesAreHard {
-	padding: 0 2em;
+	width:75%;
 	display:flex;
-	justify-content: center;
+	justify-content: space-between;
+	margin-bottom:2em;
 }

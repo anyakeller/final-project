@@ -8,18 +8,27 @@ import './style.css';
 export default function AnimationDiv(props) {
   const [direction, setDirection] = useState(1); //1 or -1
   const [index, set] = useState(0);
+  const [isEditMode, setEditMode] = useState(false);
 
   const onClickRight = () => {
     setDirection(1);
     return set(state => (state + 1) % props.contacts.length);
   };
-	
+
   const onClickLeft = () => {
     setDirection(-1);
     set(state => {
       if (state === 0) return props.contacts.length - 1;
       else return (state - 1) % props.contacts.length;
     });
+  };
+
+  const editModeOn = () => {
+    setEditMode(true);
+  };
+
+  const editModeOff = () => {
+    setEditMode(false);
   };
 
   const transitions = useTransition(props.contacts[index], item => item._id, {
@@ -34,6 +43,11 @@ export default function AnimationDiv(props) {
         <i
           onClick={onClickLeft}
           className="fas fa-long-arrow-alt-left fa-3x"></i>
+        {isEditMode ? (
+          <i onClick={editModeOff} className="fas fa-undo fa-2x"></i>
+        ) : (
+          <i onClick={editModeOn} className="fas fa-user-edit fa-3x"></i>
+        )}
         <i
           onClick={onClickRight}
           className="fas fa-long-arrow-alt-right fa-3x"></i>
@@ -41,7 +55,12 @@ export default function AnimationDiv(props) {
       <div className="simple-trans-main">
         {transitions.map(({item, props, key}) => (
           <animated.div key={key} className="bg" style={{...props}}>
-            <ContactCard key={item._id} contactData={item}></ContactCard>
+            <ContactCard
+              key={item._id}
+              contactData={item}
+              isEditMode={isEditMode}
+							editModeOff={editModeOff}
+					></ContactCard>
           </animated.div>
         ))}
       </div>
