@@ -14,12 +14,12 @@ class ContactCard extends Component {
         quickref: this.props.contactData.quickref,
         meeting_info: this.props.contactData.meeting_info
       },
-      isEditMode: false
+      isDiabledForm: true
     };
   }
 
   toggleEditMode = () => {
-    this.setState({isEditMode: !this.state.isEditMode});
+    this.setState({isDiabledForm: !this.state.isDisabledForm});
   };
 
   updateContact = () => {
@@ -42,7 +42,7 @@ class ContactCard extends Component {
         <ListItem id="contact-card">
           <DeleteBtn onClick={e => this.props.del(this.props._id)} />
           <form>
-            <fieldset>
+            <fieldset disabled={this.state.isDiabledForm ? 'disabled' : ''}>
               <span className="contact-label">First</span>
               <h4
                 style={{
@@ -53,7 +53,7 @@ class ContactCard extends Component {
                   marginTop: '.5rem',
                   paddingLeft: '.5rem',
                   display: 'inline-block',
-									marginRight:"1rem"
+                  marginRight: '1rem'
                 }}>
                 <input
                   onChange={this.handleDataChange}
