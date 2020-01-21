@@ -38,7 +38,7 @@ export default {
     return axios.post('/api/contacts', contactData);
   },
   // updates
-  saveContact: function(id,contactData) {
+  updateContact: function(id,contactData) {
     return axios.put('/api/contacts/'+id, contactData);
   },
   searchContacts: function(query) {

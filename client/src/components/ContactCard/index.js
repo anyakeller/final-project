@@ -19,7 +19,8 @@ class ContactCard extends Component {
 
   updateContact = () => {
     console.log('updateContact clicked');
-    // API.updateContact(this.props.key,this.state.contactData);
+    this.props.editModeOff();
+    API.updateContact(this.props.contactData._id,this.state.contactData);
   };
 
   handleDataChange = event => {
@@ -82,10 +83,10 @@ class ContactCard extends Component {
               </h4>
               {this.props.isEditMode ? (
                 <i
-                  onClick={this.props.editModeOff}
+                  onClick={this.updateContact}
                   className="far fa-save fa-3x"
                   style={{
-										float:"right",
+                    float: 'right',
                     color: 'lightskyblue',
                     cursor: 'pointer',
                     display: 'inline'
@@ -123,7 +124,7 @@ class ContactCard extends Component {
                 />
               </p>
             </fieldset>
-          <DeleteBtn onClick={e => this.props.del(this.props._id)} />
+            <DeleteBtn onClick={e => this.props.del(this.props._id)} />
           </form>
         </ListItem>
       </List>
